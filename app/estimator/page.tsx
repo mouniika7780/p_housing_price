@@ -27,12 +27,13 @@ export default function EstimatorPage() {
   const { history, addToHistory, removeFromHistory, clearHistory } = useHistory();
   const { compareList, addToCompare, removeFromCompare, clearCompare, canAddMore } = useCompare();
 
+
   const [reuseTrigger, setReuseTrigger] = useState(false);  
   const [reuseData,setReuseData] = useState<HistoryItem | null>(null);
 
-  console.log("EstimatorPage render:", { activeTab, history, compareList });
 
   const handleSubmit = async (data: PropertyInput) => {
+    setReuseData(null);
     await predict(data);
   };
 
@@ -58,6 +59,7 @@ export default function EstimatorPage() {
     setActiveTab("estimator");
   };
 
+
   return (
     <div className="container py-8">
       <div className="mb-8">
@@ -81,6 +83,7 @@ export default function EstimatorPage() {
         <div role="tabpanel" id="panel-estimator" aria-labelledby="tab-estimator" >
           <div className="grid grid-cols-1 gap-6">
             <PropertyForm onSubmit={handleSubmit} isLoading={isLoading} error={error} CloseErrorToast={reset} reuseTrigger={reuseTrigger} reuseData={reuseData} />
+
             {result && (
               <ResultCard result={result} onAddHistory={handleSaveHistory} onAddCompare={handleAddCompare} canAddMore={canAddMore}/>
             )}

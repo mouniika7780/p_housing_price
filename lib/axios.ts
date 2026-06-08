@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001/api/v1",
   headers: {"Content-Type": "application/json"},
   timeout: 10000,
 });
@@ -27,10 +27,8 @@ AxiosInstance.interceptors.response.use((response) =>
       }
       const message = error.response.data?.detail || "Something went wrong";
       return Promise.reject(new Error(message));
-    } else if (error.request) {
-      return Promise.reject(
-        new Error("Cannot connect to server. Is the backend running?")
-      );
+    } else if (error.request) {   
+      return Promise.reject(new Error("Cannot connect to server. Is the backend running?"));
     }
     return Promise.reject(error);
   }

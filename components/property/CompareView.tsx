@@ -103,6 +103,7 @@ export const CompareView = ({ compareList,onRemove,onClear,}: CompareViewProps) 
             {COMPARE_ROWS.map((row) => {
               const bestIndex = getBestIndex(row.key, compareList);
 
+
               return (
                 <tr key={row.key} className="hover:bg-slate-50 transition-colors" >
                   <td className="py-3 pr-4 text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">

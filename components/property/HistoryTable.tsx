@@ -43,7 +43,7 @@ const EmptyState = () => (
   </div>
 );
 
-export const HistoryTable = ({ history,onRemove,onClear,onReuse,}: HistoryTableProps) => {
+export const HistoryTable = ({ history,onRemove,onClear,onReuse}: HistoryTableProps) => {
 
   if (history.length === 0) {
     return (
@@ -70,7 +70,7 @@ export const HistoryTable = ({ history,onRemove,onClear,onReuse,}: HistoryTableP
           <thead>
             <tr className="border-b border-slate-200">
               {TABLE_COLUMNS.map((col) => (
-                <th  key={col.key} scope="col"   className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wide pb-3 pr-4 whitespace-nowrap"
+                <th  key={col.key} scope="col" className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wide pb-3 pr-4 whitespace-nowrap"
                 > {col.label} </th>
               ))}
             </tr>

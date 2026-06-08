@@ -26,21 +26,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <Header />
-        
+      <body className="min-h-full flex flex-col justify-between">
+        <Header /> 
         <main id="main-content" role="main" aria-label="Main content">
           {children}
         </main>
-
         <footer className="bg-white border-t border-slate-200 mt-16" role="contentinfo">
           <div className="container py-6">
             <p className="text-sm text-slate-400 text-center">
               © {new Date().getFullYear()} HousePredictor. All rights reserved.
             </p>
           </div>
-        </footer>
-      </body>
+        </footer> 
+      </body> 
     </html>
   );
 }

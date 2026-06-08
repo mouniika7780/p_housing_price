@@ -31,6 +31,7 @@ export const usePrediction = (): UsePredictionReturn => {
   };
 
   const reset = () => {
+    console.log("Resetting prediction state");
     setResult(null);
     setError(null);
     setIsLoading(false);

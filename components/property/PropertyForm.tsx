@@ -32,18 +32,18 @@ export const PropertyForm = ({
   reuseTrigger,
   CloseErrorToast
 }: PropertyFormProps) => {
-  console.log("error in form:", error);
+
   const [values,setValues]= useState<FormValues>(INITIAL_VALUES);
   const [errors,setErrors]= useState<FormErrors>(INITIAL_ERRORS);
   const [apiError, setApiError] = useState<string | null>(null);
 
 
-  console.log("reuseData in form:", values,errors,apiError);
-
+ 
 
    useEffect(() => {
-    if (reuseData) {
+    if (reuseData && reuseTrigger) {
       const reusedValues = Object.fromEntries(PROPERTY_FIELDS.map((f) => [f.name,String(reuseData.input[f.name as keyof typeof reuseData.input])]));
+     
       setValues(reusedValues);
       setErrors(INITIAL_ERRORS);
     }
@@ -53,6 +53,8 @@ export const PropertyForm = ({
 
 
   const validateField = (field: typeof PROPERTY_FIELDS[number],value: string): string => {
+
+
     if (value === "" || value === null || value === undefined) {
       return field.validation.required;
     }
@@ -106,17 +108,13 @@ export const PropertyForm = ({
 
     if (!validateAll()) return;
 
-    const payload = Object.fromEntries(
-      PROPERTY_FIELDS.map((f) => [f.name, parseFloat(values[f.name])])
-    ) as unknown as PropertyInput;
+    const payload = Object.fromEntries(PROPERTY_FIELDS.map((f) => [f.name, parseFloat(values[f.name])])) as unknown as PropertyInput;
 
     try {
       await onSubmit(payload);
     } catch (err) {
       console.log("API Error:", err);
-      setApiError(
-        err instanceof Error ? err.message : "Prediction failed"
-      );
+      setApiError(err instanceof Error ? err.message : "Prediction failed");
     }
   };
 
@@ -124,6 +122,7 @@ export const PropertyForm = ({
     setValues(INITIAL_VALUES);
     setErrors(INITIAL_ERRORS);
     setApiError(null);
+    CloseErrorToast();
   };
 
   return (
